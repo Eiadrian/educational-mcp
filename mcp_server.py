@@ -11,7 +11,7 @@ from fastapi.routing import APIRoute
 from fastapi.testclient import TestClient
 from mcp.server.fastmcp import FastMCP
 
-from app import app as fastapi_app
+from main import app as fastapi_app
 
 
 class FastApiMCP:
@@ -91,7 +91,7 @@ def main() -> None:
     """在子线程启动 HTTP，主线程跑 MCP stdio。"""
 
     def _run_http() -> None:
-        uvicorn.run("app:app", host="127.0.0.1", port=8000)
+        uvicorn.run("main:app", host="127.0.0.1", port=8000)
 
     threading.Thread(target=_run_http, daemon=True).start()
     mcp.run_stdio()
